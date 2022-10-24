@@ -99,60 +99,50 @@ void loop()
     Serial.println("Sistema iniciado");
     while (continua == 0) {
       for (int j = 1; j <= 6; j++) {
-        yi = j;
         for (int i = 1; i <= 4; i++) {
           xi = i;
+          yi = j;
+          giroHorario(x);
+          delay(1000);
+          desligaMotor(x);
+          delay(100);
+          Serial.print(" x = ");
+          Serial.print(xi);
+          Serial.print(" y = ");
+          Serial.print(yi);
+          Serial.print(" z = ");
+          Serial.println(cm());
           if (i == 4) {
-            for (int i = 4; i >= 1; i--) {
-              xi = i;
-              giroAntiHorario(x);
-              delay(1000);
-              desligaMotor(x);
-              delay(100);
-              Serial.print("x = ");
-              Serial.print(xi);
-              Serial.print(" y = ");
-              Serial.println(yi);
-              Serial.print("Distancia medida: ");
-              Serial.print(cm());
-            }
-          }
-          else {
-            giroHorario(x);
+            giroHorario(y);
             delay(1000);
-            desligaMotor(x);
+            desligaMotor(y);
             delay(100);
-            Serial.print("x = ");
-            Serial.print(xi);
-            Serial.print(" y = ");
-            Serial.println(yi);
-            Serial.print("Distancia medida: ");
-            Serial.print(cm());
+            j = j+1;
+            yi = j;
           }
         }
-        giroHorario(y);
-        delay(1000);
-        desligaMotor(y);
-        delay(100);
-        Serial.print("x = ");
-        Serial.print(xi);
-        Serial.print(" y = ");
-        Serial.println(yi);
-        Serial.print("Distancia medida: ");
-        Serial.print(cm());
+        for (int i = 4; i >= 1; i--) {
+          xi = i;
+          yi = j;
+          giroAntiHorario(x);
+          delay(1000);
+          desligaMotor(x);
+          delay(100);
+          Serial.print(" x = ");
+          Serial.print(xi);
+          Serial.print(" y = ");
+          Serial.print(yi);
+          Serial.print(" z = ");
+          Serial.println(cm());
+          if (i == 1) {
+            giroHorario(y);
+            delay(1000);
+            desligaMotor(y);
+            delay(100);
+          }
+        }
       }
-
-      //if (cm() < 100) {
-      //  Serial.println("Desviar do bloqueio");
-      //} else {
-      //  Serial.println("Pode continuar");
-      //}
-      //Serial.print("Distancia medida: ");
-      //Serial.print(cm());
-      //Serial.println("cm");
-      //if (!digitalRead(botao)) {
-      //  continua = 1;
-      //}
+      continua = 1;
     }
   }
 }
