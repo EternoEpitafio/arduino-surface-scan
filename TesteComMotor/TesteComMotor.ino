@@ -1,3 +1,8 @@
+//Programa: Varredura de Superfície
+//Autor: Leonardo Gabriel Cardoso de Moraes
+//Curso: Engenharia da Computação
+//Intituição: UFPA
+
 int SonarTrigger = 2;
 int SonarEcho = 3;
 
