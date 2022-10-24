@@ -9,3 +9,6 @@ https://www.youtube.com/watch?v=liHYMVjlIsQ&ab_channel=FunBots
 
 Nas fontes há uma explicação detalhada do funcionamento de cada código.
 Este projeto se encontra ainda em produção, por isso os códigos podem acabar sendo extremamente modificados a depender da necessidade.
+
+O esquema de montagem do circuito pode ser encontrado em:
+https://www.tinkercad.com/things/ay2l9EChgR0
