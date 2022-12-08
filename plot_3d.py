@@ -7,7 +7,7 @@ import plotly.offline as go_offline
 import plotly.graph_objects as go
 
 #READING AND PARSING THE DATA
-file=open('testecaptura.txt','r')
+file=open('survey_data.csv','r')
 lines=file.readlines()
 n_line=len(lines)
 x=[]
@@ -68,7 +68,7 @@ def idw_npoint(xz,yz,n_point,p):
     return z_idw
 
 # POPULATE INTERPOLATION POINTS
-n=100 #number of interpolation point for x and y axis
+n=20 #number of interpolation point for x and y axis
 x_min=min(x)
 x_max=max(x)
 y_min=min(y)
