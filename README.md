@@ -12,3 +12,7 @@ Este projeto se encontra ainda em produção, por isso os códigos podem acabar 
 
 O esquema de montagem do circuito pode ser encontrado em:
 https://www.tinkercad.com/things/ay2l9EChgR0
+
+# Esquema de montagem da simulação:
+![Simulação](EsquemaMontagem.png)
+Obs.: Os leds não estarão presentes no projeto físico, pois foram apenas um artifício para visualizar com mais facilidade o sentido de rotação dos motores durante a simulação.
