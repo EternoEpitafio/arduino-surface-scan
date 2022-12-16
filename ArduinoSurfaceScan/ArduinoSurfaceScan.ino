@@ -41,11 +41,11 @@ String valString = "<";
 
 void giroHorario(String motor) {
   if (motor == "x" ) {
-    digitalWrite(motorXa, vel);
+    analogWrite(motorXa, vel);
     digitalWrite(motorXf, HIGH);
     digitalWrite(motorXt, LOW);
   } else if (motor == "y") {
-    digitalWrite(MotorYa, vel);
+    analogWrite(MotorYa, vel);
     digitalWrite(motorYf, HIGH);
     digitalWrite(motorYt, LOW);
   }
@@ -53,11 +53,11 @@ void giroHorario(String motor) {
 
 void giroAntiHorario(String motor) {
   if (motor == "x" ) {
-    digitalWrite(motorXa, vel);
+    analogWrite(motorXa, vel);
     digitalWrite(motorXf, LOW);
     digitalWrite(motorXt, HIGH);
   } else if (motor == "y") {
-    digitalWrite(MotorYa, vel);
+    analogWrite(MotorYa, vel);
     digitalWrite(motorYf, LOW);
     digitalWrite(motorYt, HIGH);
   }
