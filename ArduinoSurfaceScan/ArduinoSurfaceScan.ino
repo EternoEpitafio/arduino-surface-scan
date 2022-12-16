@@ -25,26 +25,27 @@ String y = "y";
 int xi = 0;
 int yi = 0;
 int continua = 0;
+int vel = 128;
 
 //Marcador de início de mensagem
 String valString = "<";
 
 //Define os pinos dos motores
-#define motorXf 5
-#define motorXt 4
-#define motorXa 6
+#define motorXf 5 //motor x "frente"
+#define motorXt 4 //motor x "trás"
+#define motorXa 6 //motor x "ativa/velocidade"
 
-#define motorYf 10
-#define motorYt 8
-#define MotorYa 9
+#define motorYf 10 //motor y "frente"
+#define motorYt 8 //motor y "trás"
+#define MotorYa 9 //motor y "ativa/velocidade"
 
 void giroHorario(String motor) {
   if (motor == "x" ) {
-    digitalWrite(motorXa, HIGH);
+    digitalWrite(motorXa, vel);
     digitalWrite(motorXf, HIGH);
     digitalWrite(motorXt, LOW);
   } else if (motor == "y") {
-    digitalWrite(MotorYa, HIGH);
+    digitalWrite(MotorYa, vel);
     digitalWrite(motorYf, HIGH);
     digitalWrite(motorYt, LOW);
   }
@@ -52,11 +53,11 @@ void giroHorario(String motor) {
 
 void giroAntiHorario(String motor) {
   if (motor == "x" ) {
-    digitalWrite(motorXa, HIGH);
+    digitalWrite(motorXa, vel);
     digitalWrite(motorXf, LOW);
     digitalWrite(motorXt, HIGH);
   } else if (motor == "y") {
-    digitalWrite(MotorYa, HIGH);
+    digitalWrite(MotorYa, vel);
     digitalWrite(motorYf, LOW);
     digitalWrite(motorYt, HIGH);
   }
@@ -99,60 +100,56 @@ void setup()
 void loop()
 {
   //Inicia a varredura ao pressionar o botão
-  if (!digitalRead(botao)) {
-    continua = 0;
-    delay(2000);
-    while (continua == 0) {
-      for (int j = 1; j <= 6; j++) {
-        for (int i = 1; i <= 4; i++) {
-          xi = i;
-          yi = j;
-          giroHorario(x);
-          delay(1000);
-          desligaMotor(x);
-          delay(100);
-          //Concatena as informações e exibe no serial monitor
-          valString.concat(xi);
-          valString.concat(",");
-          valString.concat(yi);
-          valString.concat(",");
-          valString.concat(cm());
-          valString.concat(">"); //Marcador de fim de mensagem
-          Serial.print(valString); //Imprime as coordenadas
-          valString = "<";
-          if (i == 4) {
-            giroHorario(y);
-            delay(1000);
-            desligaMotor(y);
-            delay(100);
-            j = j+1;
-            yi = j;
-          }
-        }
-        for (int i = 4; i >= 1; i--) {
-          xi = i;
-          yi = j;
-          giroAntiHorario(x);
-          delay(1000);
-          desligaMotor(x);
-          delay(100);
-          //Concatena as informações e exibe no serial monitor
-          valString.concat(xi);
-          valString.concat(",");
-          valString.concat(yi);
-          valString.concat(",");
-          valString.concat(cm());
-          valString.concat(">"); //Marcador de fim de mensagem
-          Serial.print(valString); //Imprime as coordenadas
-          if (i == 1) {
-            giroHorario(y);
-            delay(1000);
-            desligaMotor(y);
-            delay(100);
-          }
-        }
+  //if (!digitalRead(botao)) {
+  continua = 0;
+  delay(5000);
+  while (continua == 0) {
+    for (int j = 1; j <= 10; j++) {
+      giroHorario(x);
+      for (int i = 1; i <= 30; i++) {
+        xi = i;
+        yi = j;
+        //Concatena as informações e exibe no serial monitor
+        valString.concat(xi);
+        valString.concat(",");
+        valString.concat(yi);
+        valString.concat(",");
+        valString.concat(cm());
+        valString.concat(">"); //Marcador de fim de mensagem
+        Serial.print(valString); //Imprime as coordenadas
+        valString = "<";
+        delay(100);
       }
-      continua = 1;
+      desligaMotor(x);
+      delay(200);
+      giroHorario(y);
+      delay(100);
+      desligaMotor(y);
+      delay(200);
+      j = j + 1;
+      yi = j;
+      giroAntiHorario(x);
+      for (int i = 30; i >= 1; i--) {
+        xi = i;
+        yi = j;
+        //Concatena as informações e exibe no serial monitor
+        valString.concat(xi);
+        valString.concat(",");
+        valString.concat(yi);
+        valString.concat(",");
+        valString.concat(cm());
+        valString.concat(">"); //Marcador de fim de mensagem
+        Serial.print(valString); //Imprime as coordenadas
+        delay(100);
+      }
+      desligaMotor(x);
+      delay(200);
+      giroHorario(y);
+      delay(100);
+      desligaMotor(y);
+      delay(200);
     }
+    continua = 1;
   }
+  //}
 }
